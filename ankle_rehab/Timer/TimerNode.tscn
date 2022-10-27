@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Font/GeliatExtralight-6YLRq.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://ankle.jpeg" type="Texture" id=2]
+[ext_resource path="res://Timer/Timer.gd" type="Script" id=3]
+[ext_resource path="res://Timer/timer_up.wav" type="AudioStream" id=4]
+[ext_resource path="res://Font/font.tres" type="DynamicFont" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 300
+font_data = ExtResource( 1 )
+
+[node name="TimerNode" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1682, 995 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="TimeLeft" type="Label" parent="."]
+margin_left = 127.0
+margin_top = 268.5
+margin_right = 363.0
+margin_bottom = 694.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="FinishSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 240, 533 )
+stream = ExtResource( 4 )
+volume_db = 4.142
+
+[node name="Cancel" type="Button" parent="."]
+margin_left = 192.0
+margin_top = 867.0
+margin_right = 301.0
+margin_bottom = 945.0
+custom_fonts/font = ExtResource( 5 )
+text = "Cancel"
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="finished" from="FinishSound" to="." method="_on_FinishSound_finished"]
+[connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
